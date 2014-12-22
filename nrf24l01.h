@@ -72,8 +72,6 @@ class nrf24l01 {
         void enablePower();
         void disablePower();
         void isrHandler();
-        void send(uint8_t *addr, char *text);
-        void send(uint8_t *addr, uint8_t *data, uint32_t len);
         void queuePacket(uint8_t *addr, uint8_t *data);
         int available();
         void readPacket(uint8_t *buffer);

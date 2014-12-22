@@ -206,47 +206,6 @@ void nrf24l01::isrHandler() {
     regWrite(REG_STATUS, &isrstat, 1);
 }
 
-void nrf24l01::send(uint8_t *addr, char *text) {
-    send(addr, (uint8_t *)text, strlen(text)+1);
-}
-
-void nrf24l01::send(uint8_t *addr, uint8_t *data, uint32_t len) {
-    uint8_t buffer[32];
-    buffer[0] = _addr[0];
-    buffer[1] = _addr[1];
-    buffer[2] = _addr[2];
-    buffer[3] = _addr[3];
-    buffer[4] = _addr[4];
-
-    uint8_t *pos = data;
-
-    uint32_t tosend = len;
-    uint32_t ctr = 0;
-
-    buffer[5] = (tosend <= 24) ? tosend : 24;
-
-    while (tosend > 0) {
-        buffer[6 + ctr] = *pos;
-        pos++;
-        tosend--;
-        if (ctr == 24) {
-            queuePacket(addr, buffer);
-            ctr = 0;
-            buffer[4] = (tosend <= 24) ? tosend : 24;
-        }
-    }
-
-    if (ctr > 0) {
-        while (ctr < 24) {
-            buffer[6 + ctr] = 0x00;
-            ctr++;
-        }
-        queuePacket(addr, buffer);
-    }
-
-}
-
-
 void nrf24l01::queuePacket(uint8_t *addr, uint8_t *packet) {
     uint8_t stat = 0;
     regRead(REG_FIFO_STATUS, &stat, 1);
