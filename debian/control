@@ -1,0 +1,13 @@
+Source: libnrf24l01-chipkit
+Section: libraries
+Priority: extra
+XBSC-Group: pic32
+Maintainer: Matt Jenkins <matt@majenko.co.uk>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.4
+
+Package: libnrf24l01-chipkit
+Architecture: all
+Depends: chipkit
+Description: nrf24l01 library for chipkit
+
