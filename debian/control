@@ -1,7 +1,8 @@
 Source: libnrf24l01-chipkit
 Section: libraries
 Priority: extra
-XBSC-Group: pic32
+XBSC-Family: pic32
+XBSC-Group: Communications
 Maintainer: Matt Jenkins <matt@majenko.co.uk>
 Build-Depends: debhelper (>= 8.0.0)
 Standards-Version: 3.9.4
