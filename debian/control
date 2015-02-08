@@ -9,6 +9,7 @@ Standards-Version: 3.9.4
 
 Package: libnrf24l01-chipkit
 Architecture: all
+Provides: nrf24l01.h
 Depends: chipkit
 Description: nrf24l01 library for chipkit
 
