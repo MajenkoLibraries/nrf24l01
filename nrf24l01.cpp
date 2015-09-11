@@ -256,3 +256,35 @@ uint8_t nrf24l01::getStatus() {
 void nrf24l01::setChannel(uint8_t chan) {
     regWrite(REG_RF_CH, &chan, 1);
 }
+
+void nrf24l01::setDataRate(uint8_t mhz) {
+    switch (mhz) {
+        case RATE_1MHZ:
+            regClr(REG_RF_SETUP, 3);
+            break;
+        case RATE_2MHZ:
+            regSet(REG_RF_SETUP, 3);
+            break;
+    }
+}
+
+void nrf24l01::setTXPower(uint8_t power) {
+    switch (power) {
+        case RF_TX_18DBM:
+            regClr(REG_RF_SETUP, 1);
+            regClr(REG_RF_SETUP, 2);
+            break;
+        case RF_TX_12DBM:
+            regSet(REG_RF_SETUP, 1);
+            regClr(REG_RF_SETUP, 2);
+            break;
+        case RF_TX_6DBM:
+            regSet(REG_RF_SETUP, 1);
+            regClr(REG_RF_SETUP, 2);
+            break;
+        case RF_TX_0DBM:
+            regSet(REG_RF_SETUP, 1);
+            regSet(REG_RF_SETUP, 2);
+            break;
+    }
+}

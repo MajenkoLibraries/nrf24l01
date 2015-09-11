@@ -43,6 +43,13 @@
 #define REG_RX_PW_P5    0x16
 #define REG_FIFO_STATUS 0x17
 
+#define RATE_1MHZ       1
+#define RATE_2MHZ       2
+
+#define RF_TX_18DBM     0
+#define RF_TX_12DBM     1
+#define RF_TX_6DBM      2
+#define RF_TX_0DBM      3
 
 class nrf24l01 {
 
@@ -77,6 +84,8 @@ class nrf24l01 {
         void readPacket(uint8_t *buffer);
         uint8_t getStatus();
         void setChannel(uint8_t chan);
+        void setDataRate(uint8_t mhz);
+        void setTXPower(uint8_t power);
 };
 
 #endif
