@@ -1,8 +1,8 @@
 README.md usr/share/doc/libnrf24l01-chipkit/
-docs/nrf24l01_tutorial_0.pdf libraries/pic32/chipkit/nrf24l01/docs
-examples/BlinkReceiver/BlinkReceiver.ino libraries/pic32/chipkit/nrf24l01/examples/BlinkReceiver
-examples/BlinkSender/BlinkSender.ino libraries/pic32/chipkit/nrf24l01/examples/BlinkSender
-nrf24l01.cpp libraries/pic32/chipkit/nrf24l01/
-nrf24l01.h libraries/pic32/chipkit/nrf24l01/
-pics/pinout.jpg libraries/pic32/chipkit/nrf24l01/pics
-pics/clone.jpg libraries/pic32/chipkit/nrf24l01/pics
+docs/nrf24l01_tutorial_0.pdf libraries/Communications/chipkit/nrf24l01/docs
+examples/BlinkReceiver/BlinkReceiver.ino libraries/Communications/chipkit/nrf24l01/examples/BlinkReceiver
+examples/BlinkSender/BlinkSender.ino libraries/Communications/chipkit/nrf24l01/examples/BlinkSender
+nrf24l01.cpp libraries/Communications/chipkit/nrf24l01/
+nrf24l01.h libraries/Communications/chipkit/nrf24l01/
+pics/clone.jpg libraries/Communications/chipkit/nrf24l01/pics
+pics/pinout.jpg libraries/Communications/chipkit/nrf24l01/pics

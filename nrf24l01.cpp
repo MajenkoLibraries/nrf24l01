@@ -34,13 +34,14 @@ nrf24l01::nrf24l01(DSPI &spi, int csn, int ce, int intr) {
     _status = 0;
 }
 
-void nrf24l01::begin(uint8_t ad0, uint8_t ad1, uint8_t ad2, uint8_t ad3, uint8_t ad4, uint8_t chan) {
+void nrf24l01::begin(uint8_t ad0, uint8_t ad1, uint8_t ad2, uint8_t ad3, uint8_t ad4, uint8_t chan, uint8_t width) {
     _spi->begin();
     _addr[0] = ad0;
     _addr[1] = ad1;
     _addr[2] = ad2;
     _addr[3] = ad3;
     _addr[4] = ad4;
+    _pipeWidth = width;
     pinMode(_csn, OUTPUT);
     pinMode(_ce, OUTPUT);
     pinMode(_intr, INPUT);
@@ -161,8 +162,7 @@ void nrf24l01::enablePipe(int pipe, uint8_t *addr) {
     regSet(REG_EN_RXADDR, pipe);
     regWrite(REG_SETUP_AW, &pw, 1);
     regWrite(REG_RX_ADDR_P0 + pipe, addr, 5);
-    pw = 32;
-    regWrite(REG_RX_PW_P0 + pipe, &pw, 1);
+    regWrite(REG_RX_PW_P0 + pipe, &_pipeWidth, 1);
     regSet(REG_EN_AA, pipe);
 }
 
@@ -218,7 +218,7 @@ void nrf24l01::queuePacket(uint8_t *addr, uint8_t *packet) {
     selectTX();
     digitalWrite(_csn, LOW);
     _status = _spi->transfer(CMD_TX);
-    for (int i = 0; i < 32; i++) {
+    for (int i = 0; i < _pipeWidth; i++) {
         _spi->transfer(packet[i]);
     }
     digitalWrite(_csn, HIGH);
@@ -242,7 +242,7 @@ void nrf24l01::readPacket(uint8_t *buffer) {
     digitalWrite(_csn, LOW);
     _status = _spi->transfer(CMD_RX);
 
-    for (int i = 0; i < 32; i++) {
+    for (int i = 0; i < _pipeWidth; i++) {
         buffer[i] = _spi->transfer(0xFF);
     }
     digitalWrite(_csn, HIGH);

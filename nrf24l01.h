@@ -9,6 +9,8 @@
 
 #include <DSPI.h>
 
+#define DEFAULT_PIPE_WIDTH      32
+
 #define CMD_REG_R       0x00
 #define CMD_REG_W       0x20
 #define CMD_RX          0x61
@@ -64,6 +66,7 @@ class nrf24l01 {
         uint8_t _addr[5];
         uint8_t _bc[5];
         uint8_t _mode;
+        uint8_t _pipeWidth;
 
         void regRead(uint8_t reg, uint8_t *buffer, uint8_t len);
         void regWrite(uint8_t reg, uint8_t *buffer, uint8_t len);
@@ -74,7 +77,7 @@ class nrf24l01 {
 
     public:
         nrf24l01(DSPI &spi, int csn, int ce, int intr);
-        void begin(uint8_t addr0, uint8_t addr1, uint8_t addr2, uint8_t addr3, uint8_t addr4, uint8_t chan);
+        void begin(uint8_t addr0, uint8_t addr1, uint8_t addr2, uint8_t addr3, uint8_t addr4, uint8_t chan, uint8_t width = DEFAULT_PIPE_WIDTH);
         void enablePipe(int pipe, uint8_t *addr);
         void enablePower();
         void disablePower();
